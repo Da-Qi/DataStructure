@@ -17,3 +17,5 @@
           - 反转单链表
      - 双向链表：在添加或者删除数据时，最后一位需要额外的判断以免空指针异常。
      - 约瑟夫问题：小孩出圈;
+4. <a href='https://github.com/Da-Qi/DataStructure/blob/master/src/stack'>栈</a>
+    - 数组实现、链表实现(我使用的头插法)

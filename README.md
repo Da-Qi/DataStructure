@@ -19,3 +19,6 @@
      - 约瑟夫问题：小孩出圈;
 4. <a href='https://github.com/Da-Qi/DataStructure/blob/master/src/stack'>栈</a>
     - 数组实现、链表实现(我使用的头插法)
+    - 简单计算器的实现
+    - 中缀表达式和后缀表达式的转换
+    - 后缀表达式的计算

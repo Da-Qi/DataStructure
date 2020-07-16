@@ -46,7 +46,7 @@ public class PolandNotation {
             } else if (ele.equals("(")) {
                 s1.push(ele);
             } else if (ele.equals(")")) {
-                //如果是右括号，则依次弹出s1栈顶的运算符，并压入s2，直到遇到左括号未知，且这对括号呗丢弃
+                //如果是右括号，则依次弹出s1栈顶的运算符，并压入s2，直到遇到左括号为止，且这对括号丢弃
                 while (!s1.peek().equals("(")) {
                     s2.add(s1.pop());
                 }

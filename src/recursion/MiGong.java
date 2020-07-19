@@ -47,7 +47,7 @@ public class MiGong {
      * @param j   从哪个位置开始找
      * @return 找到通路为true，否则为false
      */
-    /*public static boolean setWay(int[][] map,int i,int j){
+    public static boolean setWay(int[][] map,int i,int j){
         if (map[6][1] == 2){
             //通路已经找到
             return true;
@@ -78,8 +78,8 @@ public class MiGong {
                 return false;
             }
         }
-    }*/
-
+    }
+/*
     //修改策略 上右下左
     public static boolean setWay(int[][] map, int i, int j) {
         if (map[6][5] == 2) {
@@ -112,6 +112,6 @@ public class MiGong {
                 return false;
             }
         }
-    }
+    }*/
 }
 

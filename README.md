@@ -22,3 +22,8 @@
     - 简单计算器的实现
     - 中缀表达式和后缀表达式的转换
     - 后缀表达式的计算
+ ## 基本算法
+ 1. <a href='https://github.com/Da-Qi/DataStructure/blob/master/src/recursion'>递归</a>
+    - 迷宫回溯问题
+    - 八皇后问题
+ 2. <a href='https://github.com/Da-Qi/DataStructure/blob/master/src/sort'>排序</a>

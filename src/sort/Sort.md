@@ -240,3 +240,53 @@
     
         }
         }
+# 基数排序
+1. 描述：将数组中的数据按相同的十进制位进行分类，分别放入10个数组中(可以看做桶)，从个位到最高位每次放入并取出，最后取出的便是有序数组
+2. 实现：
+
+        //基数排序
+        class Radix {
+            public static void radixSort(int[] arr) {
+                //首先要确定做多少次排序
+                int max = arr[0];
+                for (int i = 1; i < arr.length; i++) {
+                    if (max < arr[i]) {
+                        max = arr[i];
+                    }
+                }
+                int times = (max + "").length();
+        
+                //创建二维数组，作为桶来存储数据
+                int[][] bucket = new int[10][arr.length];
+                //创建一个数组，来存储每个桶有多少数据，方便取出
+                int[] bucketNum = new int[10];
+        
+                for (int i = 0, n = 1; i < times; i++, n *= 10) {
+                    //将同位下各个数放入桶
+                    for (int numIndex = 0; numIndex < arr.length; numIndex++) {
+                        //每一个数末位
+                        int lastNum = arr[numIndex] / n % 10;
+                        //存入桶
+                        bucket[lastNum][bucketNum[lastNum]] = arr[numIndex];
+                        bucketNum[lastNum]++;
+                    }
+        
+                    //原数组下标
+                    int t = 0;
+                    //从桶中取出并放入arr
+                    for (int outIndex = 0; outIndex < arr.length; outIndex++) {
+                        //判断当前桶是否有数据
+                        if (bucketNum[outIndex] != 0) {
+                            //有数据
+                            for (int o = 0; o < bucketNum[outIndex]; o++) {
+                                arr[t] = bucket[outIndex][o];
+                                t++;
+                            }
+                            //桶中的数据一定要记得清零
+                            bucketNum[outIndex] = 0;
+                        }
+        
+                    }
+                }
+            }
+        }

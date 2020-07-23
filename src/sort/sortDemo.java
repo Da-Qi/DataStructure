@@ -5,9 +5,9 @@ import java.util.Date;
 
 public class sortDemo {
     public static void main(String[] args) {
-        int[] arr = new int[8000000];
-        for (int i = 0; i < 8000000; i++) {
-            arr[i] = (int) (Math.random() * 80000000);
+        int[] arr = new int[8];
+        for (int i = 0; i < 8; i++) {
+            arr[i] = (int) (Math.random() * 80);
         }
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -19,16 +19,17 @@ public class sortDemo {
         //Insert.InsertSort(arr);
         //Shell.ShellSort(arr);
         //Quick.QuickSort(arr, 0, 7);
-        int[] temp = new int[arr.length];
-        Merge.MergeSort(arr, 0, arr.length - 1, temp);
+        //int[] temp = new int[arr.length];
+        //Merge.MergeSort(arr, 0, arr.length - 1, temp);
+        Radix.radixSort(arr);
 
 
         Date date2 = new Date();
         String format1 = simpleDateFormat.format(date2);
         System.out.println("执行后的时间：" + format1);
-        /*for (int i : arr) {
+        for (int i : arr) {
             System.out.print(i + " ");
-        }*/
+        }
 
     }
 
@@ -275,5 +276,52 @@ class Merge {
             t++;
         }
 
+    }
+}
+
+//基数排序
+class Radix {
+    public static void radixSort(int[] arr) {
+        //首先要确定做多少次排序
+        int max = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            if (max < arr[i]) {
+                max = arr[i];
+            }
+        }
+        int times = (max + "").length();
+
+        //创建二维数组，作为桶来存储数据
+        int[][] bucket = new int[10][arr.length];
+        //创建一个数组，来存储每个桶有多少数据，方便取出
+        int[] bucketNum = new int[10];
+
+        for (int i = 0, n = 1; i < times; i++, n *= 10) {
+            //将同位下各个数放入桶
+            for (int numIndex = 0; numIndex < arr.length; numIndex++) {
+                //每一个数末位
+                int lastNum = arr[numIndex] / n % 10;
+                //存入桶
+                bucket[lastNum][bucketNum[lastNum]] = arr[numIndex];
+                bucketNum[lastNum]++;
+            }
+
+            //原数组下标
+            int t = 0;
+            //从桶中取出并放入arr
+            for (int outIndex = 0; outIndex < arr.length; outIndex++) {
+                //判断当前桶是否有数据
+                if (bucketNum[outIndex] != 0) {
+                    //有数据
+                    for (int o = 0; o < bucketNum[outIndex]; o++) {
+                        arr[t] = bucket[outIndex][o];
+                        t++;
+                    }
+                    //桶中的数据一定要记得清零
+                    bucketNum[outIndex] = 0;
+                }
+
+            }
+        }
     }
 }

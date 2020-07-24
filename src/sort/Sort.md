@@ -290,3 +290,50 @@
                 }
             }
         }
+# 堆排序
+1. 描述：升序用大顶堆，降序用小顶堆；现在以大顶堆为例进行说明：从最后一个子节点(length/2 -1)开始和它的两个子节点进行比较，把较大的数赋值给这个节点，依次往上直到根节点。这样最顶部的节点就是最大节点，然后把它和最后一个节点进行交换，并且不再参与大顶堆的调整，剩下的n-1个元素继续调整大顶堆，如此往复n-1次便生产了有序数组。
+2. 注意：每一次比较当前子节点时，别忘了它的子节点也要紧跟着完成调整
+3. 实现：
+
+        //堆排序
+        class Heap {
+            public static void heapSort(int[] arr){
+                //将数组调整为大顶堆
+                for (int i= arr.length/2-1;i>=0;i--){
+                    adjustHeap(arr,i,arr.length);
+                }
+                int temp = 0;
+                //调整完毕后，交换堆顶元素与末尾元素
+                for (int j=arr.length-1;j>0;j--){
+                    temp = arr[j];
+                    arr[j] = arr[0];
+                    arr[0] = temp;
+                    //最后一位已经是最大了，不必参与调整
+                    adjustHeap(arr,0,j);
+                }
+                //System.out.println(Arrays.toString(arr));
+            }
+            //调整为大顶堆
+            public static void adjustHeap(int[] arr, int i, int length) {
+                //取出当前节点值保存
+                int temp = arr[i];
+                for (int k = 2 * i + 1; k < length; k = k * 2 + 1) {
+                    //比较其子节点的大小
+                    //如果右子节点比左子节点大，则k指向右子节点
+                    if (k + 1 < length && arr[k] < arr[k + 1]) {
+                        k++;
+                    }
+                    //比较父节点与较大子节点的大小关系
+                    if (temp < arr[k]) {
+                        //把子节点的值赋值给父节点
+                        arr[i] = arr[k];
+                        //同时这个父节点为了便于接下来的子节点继续和它进行比较，把k值赋值给了i
+                        i = k;
+                    }else{
+                        break;
+                    }
+                }
+                arr[i] = temp;
+        
+            }
+        }

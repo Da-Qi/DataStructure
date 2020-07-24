@@ -1,13 +1,14 @@
 package sort;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 public class sortDemo {
     public static void main(String[] args) {
-        int[] arr = new int[8];
-        for (int i = 0; i < 8; i++) {
-            arr[i] = (int) (Math.random() * 80);
+        int[] arr = new int[8000000];
+        for (int i = 0; i < 8000000; i++) {
+            arr[i] = (int) (Math.random() * 800000000);
         }
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -21,15 +22,17 @@ public class sortDemo {
         //Quick.QuickSort(arr, 0, 7);
         //int[] temp = new int[arr.length];
         //Merge.MergeSort(arr, 0, arr.length - 1, temp);
-        Radix.radixSort(arr);
+        //Radix.radixSort(arr);
+        //int[] arr2 = {4,6,8,5,9};
+        Heap.heapSort(arr);
 
 
         Date date2 = new Date();
         String format1 = simpleDateFormat.format(date2);
         System.out.println("执行后的时间：" + format1);
-        for (int i : arr) {
+        /*for (int i : arr) {
             System.out.print(i + " ");
-        }
+        }*/
 
     }
 
@@ -323,5 +326,48 @@ class Radix {
 
             }
         }
+    }
+}
+
+//堆排序
+class Heap {
+    public static void heapSort(int[] arr){
+        //将数组调整为大顶堆
+        for (int i= arr.length/2-1;i>=0;i--){
+            adjustHeap(arr,i,arr.length);
+        }
+        int temp = 0;
+        //调整完毕后，交换堆顶元素与末尾元素
+        for (int j=arr.length-1;j>0;j--){
+            temp = arr[j];
+            arr[j] = arr[0];
+            arr[0] = temp;
+            //最后一位已经是最大了，不必参与调整
+            adjustHeap(arr,0,j);
+        }
+        //System.out.println(Arrays.toString(arr));
+    }
+    //调整为大顶堆
+    public static void adjustHeap(int[] arr, int i, int length) {
+        //取出当前节点值保存
+        int temp = arr[i];
+        for (int k = 2 * i + 1; k < length; k = k * 2 + 1) {
+            //比较其子节点的大小
+            //如果右子节点比左子节点大，则k指向右子节点
+            if (k + 1 < length && arr[k] < arr[k + 1]) {
+                k++;
+            }
+            //比较父节点与较大子节点的大小关系
+            if (temp < arr[k]) {
+                //把子节点的值赋值给父节点
+                arr[i] = arr[k];
+                //同时这个父节点为了便于接下来的子节点继续和它进行比较，把k值赋值给了i
+                i = k;
+            }else{
+                break;
+            }
+        }
+        arr[i] = temp;
+
     }
 }

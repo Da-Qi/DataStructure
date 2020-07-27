@@ -6,9 +6,9 @@ import java.util.Date;
 
 public class sortDemo {
     public static void main(String[] args) {
-        int[] arr = new int[8000000];
-        for (int i = 0; i < 8000000; i++) {
-            arr[i] = (int) (Math.random() * 800000000);
+        int[] arr = new int[8];
+        for (int i = 0; i < 8; i++) {
+            arr[i] = (int) (Math.random() * 800);
         }
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -18,21 +18,21 @@ public class sortDemo {
         //Bubble.BubbleSort(arr);
         //Select.SelectSort(arr);
         //Insert.InsertSort(arr);
-        //Shell.ShellSort(arr);
+        arr = Shell.ShellSort(arr);
         //Quick.QuickSort(arr, 0, 7);
         //int[] temp = new int[arr.length];
         //Merge.MergeSort(arr, 0, arr.length - 1, temp);
         //Radix.radixSort(arr);
         //int[] arr2 = {4,6,8,5,9};
-        Heap.heapSort(arr);
+        //Heap.heapSort(arr);
 
 
         Date date2 = new Date();
         String format1 = simpleDateFormat.format(date2);
         System.out.println("执行后的时间：" + format1);
-        /*for (int i : arr) {
+        for (int i : arr) {
             System.out.print(i + " ");
-        }*/
+        }
 
     }
 
@@ -147,11 +147,11 @@ class Shell {
         while (gap > 0) {
             //执行同一个步长下的数的排序
             for (int i = gap; i < arr.length; i++) {
-                int j = gap;
+                int j = i;
                 int temp = arr[j];
                 //如果当前数，比同一组的前一个数小，就有必要进行移位操作；
                 if (arr[j] < arr[j - gap]) {
-                    while (j - gap >= 0 && arr[j] < arr[j - gap]) {
+                    while (j - gap >= 0 && temp < arr[j - gap]) {
                         //后移，把j的位置让给前一个gap，空出来的就是j-gap赋值给j
                         arr[j] = arr[j - gap];
                         j -= gap;

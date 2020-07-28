@@ -6,8 +6,8 @@ import java.util.Date;
 
 public class sortDemo {
     public static void main(String[] args) {
-        int[] arr = new int[8];
-        for (int i = 0; i < 8; i++) {
+        int[] arr = new int[80];
+        for (int i = 0; i < 80; i++) {
             arr[i] = (int) (Math.random() * 800);
         }
         Date date = new Date();
@@ -18,11 +18,11 @@ public class sortDemo {
         //Bubble.BubbleSort(arr);
         //Select.SelectSort(arr);
         //Insert.InsertSort(arr);
-        arr = Shell.ShellSort(arr);
+        //arr = Shell.ShellSort(arr);
         //Quick.QuickSort(arr, 0, 7);
         //int[] temp = new int[arr.length];
         //Merge.MergeSort(arr, 0, arr.length - 1, temp);
-        //Radix.radixSort(arr);
+        Radix.radixSort(arr);
         //int[] arr2 = {4,6,8,5,9};
         //Heap.heapSort(arr);
 
@@ -312,7 +312,7 @@ class Radix {
             //原数组下标
             int t = 0;
             //从桶中取出并放入arr
-            for (int outIndex = 0; outIndex < arr.length; outIndex++) {
+            for (int outIndex = 0; outIndex < 10; outIndex++) {
                 //判断当前桶是否有数据
                 if (bucketNum[outIndex] != 0) {
                     //有数据
